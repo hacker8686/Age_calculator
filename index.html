@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #333, #000);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+
+        }
+
+        .calculator {
+            background-color: black;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(86, 174, 236, 0.753);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(86, 174, 236, 0.753);
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 16px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            
+            
+        }
+        .year
+        {
+            background-color: white;
+            color: black;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(86, 174, 236, 0.753);
+        }
+        .month
+        {
+            background-color: white;
+            color: black;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(86, 174, 236, 0.753);
+        }
+        .days
+        {
+            background-color: white;
+            color: black;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(86, 174, 236, 0.753);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="calculator">
+        <h2>Age Calculator</h2>
+        <form id="ageForm">
+            <label for="birthdate">Enter your Date Of Birthdate:</label>
+            <input type="date" id="birthdate" required>
+
+            <button type="button" onclick="calculateAge()">Calculate Age</button>
+
+            <div id="result" class="result">
+                <div class="year" id="year">Year</div>
+                <div class="month" id="month">Month</div>
+                <div class="days" id="days">Days</div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function calculateAge() {
+            // Get the birthdate from the input field
+            var birthdateInput = document.getElementById('birthdate');
+            var birthdate = new Date(birthdateInput.value);
+
+            // Get the current date
+            var today = new Date();
+             // Validate if the birthdate is not in the future
+             if (birthdate > today) {
+                alert("Please enter a valid birthdate. The child is not born yet.");
+                return;
+            }
+            // Calculate the difference in years, months, and days
+            var years = today.getFullYear() - birthdate.getFullYear();
+            var months = today.getMonth() - birthdate.getMonth();
+            var days = today.getDate() - birthdate.getDate();
+
+            // Adjust for negative months or days
+            if (days < 0) {
+                months--;
+                days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            // Display the result
+            var final_year = document.getElementById('year');
+            final_year.innerHTML=`Year: ${years}`
+            var final_month= document.getElementById("month")
+            final_month.innerHTML=`Month: ${months}`
+            var final_day= document.getElementById("days")
+            final_day.innerHTML=`Days: ${days}`
+            
+        }
+    </script>
+</body>
+</html>
